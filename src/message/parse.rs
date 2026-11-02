@@ -30,7 +30,7 @@ pub struct ParseOptions {
 }
 
 impl ParseOptions {
-    /// The behaviour of `nistitl`: the first error stops the parsing (the
+    /// The behaviour of the reference implementation: the first error stops the parsing (the
     /// default, LIB-14).
     ///
     /// ```
@@ -43,8 +43,8 @@ impl ParseOptions {
     }
 
     /// Reads as much as possible (LIB-13): the parsing always succeeds, and
-    /// each error `nistitl` would raise becomes a [`Diagnostic`] with a
-    /// recovery (SPEC §13.2). The quirks E3 to E5 of `nistitl`, kept as is,
+    /// each error the reference implementation would raise becomes a [`Diagnostic`] with a
+    /// recovery (SPEC §13.2). The quirks E3 to E5 of the reference implementation, kept as is,
     /// are reported too.
     ///
     /// On a buffer that the strict mode accepts, the message read is the
@@ -93,7 +93,7 @@ pub struct Parsed {
 }
 
 impl Message {
-    /// Reads a message (`Message().parse(buffer)`), as `nistitl` does.
+    /// Reads a message (`Message().parse(buffer)`), as the reference implementation does.
     ///
     /// The buffer is copied once into a shared buffer; binary data are views
     /// on it. Use [`Message::parse_shared`] to avoid the copy.
@@ -136,7 +136,7 @@ impl Message {
         Parser::run(buffer.into(), false).map(|parsed| parsed.message)
     }
 
-    /// [`Message::parse`], also returning the warnings that `nistitl` emits
+    /// [`Message::parse`], also returning the warnings that the reference implementation emits
     /// (`DeprecationWarning` for records of type 3, 5 and 6).
     ///
     /// ```
@@ -239,8 +239,8 @@ impl Notes {
         Ok(())
     }
 
-    /// A quirk of `nistitl`, kept as is, that the tolerant mode reports
-    /// (E3–E5): `nistitl` raises nothing, so the message is the crate's.
+    /// A quirk of the reference implementation, kept as is, that the tolerant mode reports
+    /// (E3–E5): the reference implementation raises nothing, so the message is the crate's.
     fn note(&mut self, code: DiagnosticCode, message: String, position: Position) {
         if self.tolerant {
             self.diagnostics.push(Diagnostic {
@@ -253,7 +253,7 @@ impl Notes {
     }
 }
 
-/// Visitor of `nistitl` (`_Parser`, SPEC §10.8): fills a tagged record.
+/// Visitor of the reference implementation (`_Parser`, SPEC §10.8): fills a tagged record.
 struct TextParser<'a> {
     record: &'a mut AsciiRecord,
     subfields: Vec<SubField>,
@@ -445,7 +445,7 @@ struct Parser {
     notes: Notes,
     /// Bytes the tolerant mode could not read.
     trailing: Bytes,
-    /// Number of the last tagged record read (`record` in `nistitl`).
+    /// Number of the last tagged record read (`record` in the reference implementation).
     last_tagged: Option<PyInt>,
     /// Last search of the data label: from where, for which label, and what
     /// it found. Offsets only grow, so a match after the new start stands.
@@ -633,7 +633,7 @@ impl Parser {
                     }
                     Some(first) if first - offset > length => {
                         future = Some((DiagnosticCode::LenMismatch, Error::nist_too_long()));
-                        // `nistitl` stops before the FS, which then reads as
+                        // the reference implementation stops before the FS, which then reads as
                         // extra bytes; the tolerant mode keeps it.
                         if self.notes.tolerant && Some(first) == pos_fs {
                             first - offset + 1

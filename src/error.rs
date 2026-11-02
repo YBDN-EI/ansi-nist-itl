@@ -1,8 +1,8 @@
 //! Errors (SPEC §4.2–4.4).
 //!
-//! [`Error`] mirrors the exceptions of `nistitl`: a [`NistError`] code for
+//! [`Error`] mirrors the exceptions of the reference implementation: a [`NistError`] code for
 //! `NistException`, and a dedicated [`ErrorKind`] for each Python exception
-//! that `nistitl` lets through (SPEC §12). [`Display`](fmt::Display) gives the
+//! that the reference implementation lets through (SPEC §12). [`Display`](fmt::Display) gives the
 //! exact text of the Python exception; the [`Position`] is an addition that
 //! never appears in it.
 
@@ -14,7 +14,7 @@ use crate::value::PyInt;
 /// `Result` with the crate's [`Error`].
 pub type Result<T, E = Error> = std::result::Result<T, E>;
 
-/// Error codes of `nistitl` (`NistError`), with the same numeric values.
+/// Error codes of the reference implementation (`NistError`), with the same numeric values.
 ///
 /// ```
 /// use ansi_nist_itl::NistError;
@@ -99,7 +99,7 @@ impl fmt::Display for NistError {
 /// Category of an [`Error`].
 ///
 /// [`ErrorKind::Nist`] stands for `NistException`. The other variants stand
-/// for the Python exceptions that `nistitl` does not catch (SPEC §12): the
+/// for the Python exceptions that the reference implementation does not catch (SPEC §12): the
 /// crate turns them into typed errors and keeps the Python message.
 ///
 /// ```
@@ -165,7 +165,7 @@ pub struct Position {
     pub offset: Option<usize>,
 }
 
-/// Error of the crate: the equivalent of the exception raised by `nistitl`.
+/// Error of the crate: the equivalent of the exception raised by the reference implementation.
 ///
 /// `Display` gives the text of the Python exception, character for
 /// character: `"{NAME}: {message}"` for a `NistException`, the bare message
@@ -212,7 +212,7 @@ impl Error {
         &self.0.position
     }
 
-    /// The `nistitl` code, for a `NistException`.
+    /// The the reference implementation code, for a `NistException`.
     pub fn nist_error(&self) -> Option<NistError> {
         match self.0.kind {
             ErrorKind::Nist(code) => Some(code),
@@ -586,7 +586,7 @@ impl std::error::Error for Error {
     }
 }
 
-/// Warning raised while parsing, where `nistitl` calls `warnings.warn`.
+/// Warning raised while parsing, where the reference implementation calls `warnings.warn`.
 ///
 /// `Display` is the text of the Python warning.
 ///
@@ -693,7 +693,7 @@ pub enum Severity {
 /// A problem met by the tolerant mode, and how it was overcome
 /// (SPEC §13.2).
 ///
-/// `message` is the text of the error that `nistitl` would have raised;
+/// `message` is the text of the error that the reference implementation would have raised;
 /// `Display` gives the severity, the code and this text.
 ///
 /// ```
@@ -717,7 +717,7 @@ pub struct Diagnostic {
     pub severity: Severity,
     /// Where it happened.
     pub position: Position,
-    /// Text of the error that `nistitl` would have raised.
+    /// Text of the error that the reference implementation would have raised.
     pub message: String,
 }
 
@@ -799,7 +799,7 @@ mod tests {
         }
     }
 
-    /// Every message of SPEC §4.4, compared with the text printed by `nistitl`.
+    /// Every message of SPEC §4.4, compared with the text printed by the reference implementation.
     #[test]
     fn messages() {
         let cases: Vec<(Error, &str)> = vec![

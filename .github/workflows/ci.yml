@@ -75,7 +75,7 @@ jobs:
       - run: cargo doc --no-deps --all-features
 
   oracle:
-    name: Oracle (nistitl 0.6)
+    name: Oracle (the reference implementation)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -87,7 +87,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Synthetic corpus (seed = run number)
         run: python -I tools/oracle/gen_corpus.py "$RUNNER_TEMP/corpus" 20000 "$GITHUB_RUN_NUMBER"
-      - name: Compare with nistitl
+      - name: Compare with the reference implementation
         run: cargo test --release --test oracle
         env:
           ANSI_NIST_ITL_CORPUS: ${{ runner.temp }}/corpus

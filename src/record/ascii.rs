@@ -163,7 +163,7 @@ fn same_shape(a: &AnyField, b: &AnyField) -> bool {
 ///
 /// Fields are text ([`Field`]) or binary ([`BinaryField`]), each identified
 /// by its tag number and, optionally, an alias taken from the table of
-/// `nistitl` when the field is added.
+/// the reference implementation when the field is added.
 ///
 /// ```
 /// use ansi_nist_itl::{AsciiRecord, Value};
@@ -482,7 +482,7 @@ impl AsciiRecord {
     /// Removes the first field with this tag number (`del record[tag]`), and
     /// returns it; nothing happens if there is none.
     ///
-    /// `nistitl` compares the key with the tag only: an alias never removes
+    /// the reference implementation compares the key with the tag only: an alias never removes
     /// anything, so only a number is accepted here.
     ///
     /// ```
@@ -499,7 +499,7 @@ impl AsciiRecord {
     /// ```compile_fail
     /// # use ansi_nist_itl::AsciiRecord;
     /// let mut r = AsciiRecord::new(2)?;
-    /// r.remove_field("IDC"); // `del r['IDC']` has no effect in `nistitl`
+    /// r.remove_field("IDC"); // `del r['IDC']` has no effect in the reference implementation
     /// # Ok::<(), ansi_nist_itl::Error>(())
     /// ```
     pub fn remove_field(&mut self, tag: impl Into<PyInt>) -> Option<AnyField> {
@@ -554,7 +554,7 @@ impl AsciiRecord {
     /// [`AsciiRecord::set`]; `DATA` and `_N` add a [`BinaryField`] when the
     /// tag is the `DATA` of the table.
     ///
-    /// `DATA` on a type without it gives the `TypeError` of `nistitl`, and a
+    /// `DATA` on a type without it gives the `TypeError` of the reference implementation, and a
     /// text field only takes text (`TypeMismatch`).
     ///
     /// ```
@@ -864,7 +864,7 @@ impl AsciiRecord {
     }
 
     /// `true` if the record was read and has not changed since, LEN and CNT
-    /// aside: `nistitl` recomputes them on write.
+    /// aside: the reference implementation recomputes them on write.
     pub(crate) fn is_unchanged(&self) -> bool {
         let Some(origin) = self.origin() else {
             return false;
@@ -1139,7 +1139,7 @@ mod tests {
 
     #[test]
     fn digits_limit_is_an_unknown_attribute() {
-        // `int()` raises `ValueError` for both, caught by `nistitl`.
+        // `int()` raises `ValueError` for both, caught by the reference implementation.
         let mut r = AsciiRecord::new(2).unwrap();
         let name = format!("_{}", "1".repeat(4301));
         let e = r.set(&name, "x").unwrap_err();

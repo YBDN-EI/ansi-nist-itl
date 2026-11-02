@@ -198,7 +198,7 @@ impl SubField {
     /// Changes the kind, without checking the current content.
     ///
     /// Without `I`, existing items are hidden from [`SubField::value`] but
-    /// still written by [`SubField::to_bytes`], as in `nistitl`.
+    /// still written by [`SubField::to_bytes`], as in the reference implementation.
     ///
     /// ```
     /// use ansi_nist_itl::{SubField, SubValue};

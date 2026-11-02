@@ -1,4 +1,4 @@
-//! Aliases of the fields, as `nistitl` 0.6 defines them (`ALIASES`, SPEC
+//! Aliases of the fields, as the reference implementation defines them (`ALIASES`, SPEC
 //! §4.5, annex A, LIB-07).
 //!
 //! A field added to a record without alias takes the alias of its tag in
@@ -18,7 +18,7 @@
 //! # Ok::<(), ansi_nist_itl::Error>(())
 //! ```
 //!
-//! A record type absent from the table is unknown: `nistitl` raises
+//! A record type absent from the table is unknown: the reference implementation raises
 //! `KeyError`, the crate [`ErrorKind::UnknownRecordType`](crate::ErrorKind::UnknownRecordType).
 
 mod names;

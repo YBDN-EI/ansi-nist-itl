@@ -1,6 +1,6 @@
-//! Python 3.12 conversions that `nistitl` relies on (SPEC §3).
+//! Python 3.12 conversions that the reference implementation relies on (SPEC §3).
 //!
-//! `nistitl` reads numbers with `int()`, writes values with `str()`, builds
+//! the reference implementation reads numbers with `int()`, writes values with `str()`, builds
 //! error messages and summaries with `repr()` and string formatting. Matching
 //! its output character for character requires reproducing CPython's rules,
 //! Unicode tables included. Everything here is internal to the crate.

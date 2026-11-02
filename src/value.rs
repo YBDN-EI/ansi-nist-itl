@@ -1,6 +1,6 @@
 //! Values stored in fields, subfields and items (SPEC §2).
 //!
-//! `nistitl` stores arbitrary Python objects. The crate covers what it
+//! the reference implementation stores arbitrary Python objects. The crate covers what it
 //! produces when reading and what its examples write: `None`, `bool`, `int`
 //! and `str` ([`Scalar`]), and lists of them ([`Value`], [`SubValue`],
 //! [`Item`]). `Display` gives Python's `str()`.
@@ -12,7 +12,7 @@ use crate::py;
 
 /// Arbitrary-precision integer, the equivalent of a Python `int`.
 ///
-/// `nistitl` reads tag numbers, LEN and IDC with Python's `int()`, which has
+/// the reference implementation reads tag numbers, LEN and IDC with Python's `int()`, which has
 /// no upper bound: a tag of 20 digits is valid. `PyInt` keeps the decimal
 /// digits in canonical form (no leading zeros, `0` is never negative) and
 /// only supports what the crate needs: comparison, display and conversion
@@ -218,7 +218,7 @@ impl Scalar {
 }
 
 impl Default for Scalar {
-    /// `""`, the default value of `nistitl` fields and subfields.
+    /// `""`, the default value of the reference implementation fields and subfields.
     fn default() -> Self {
         Scalar::Text(String::new())
     }

@@ -40,11 +40,11 @@ Stable API: no breaking change before 2.0.
 
 ### Documentation
 
-- README rewritten: comparison with `nistitl`, quick start, guarantees, performance; its Rust
+- README rewritten: comparison with the reference implementation, quick start, guarantees, performance; its Rust
   examples compile as doctests. `examples/inspect.rs`: summary and validation of a file from the
   command line. `CONTRIBUTING.md`, `SECURITY.md`, issue and pull request templates.
 
-- `docs/SPEED.md`: speed compared with `nistitl` on the same corpora (3 to 4 times faster on
+- `docs/SPEED.md`: speed compared with the reference implementation on the same corpora (3 to 4 times faster on
   usual messages, equal on large images), with `examples/speed.rs`, `tools/bench/speed.py` and
   `tools/bench/gen_messages.py` to reproduce it.
 
@@ -77,13 +77,13 @@ Stable API: no breaking change before 2.0.
 
 ## [0.1.0] - 2026-10-21
 
-First release: parity with `nistitl` 0.6.
+First release: parity with the reference implementation.
 
 ### Added
 
 - Python value model (`Scalar`, `PyInt`, `Value`, `Item`, `Kind`) and the conversions of
-  CPython 3.12 that `nistitl` relies on (`int()`, `str()`, `repr()`, formatting).
-- `SubField`, `Field`, `BinaryField`, `AnyField`, with the checks and writing of `nistitl`.
+  CPython 3.12 that the reference implementation relies on (`int()`, `str()`, `repr()`, formatting).
+- `SubField`, `Field`, `BinaryField`, `AnyField`, with the checks and writing of the reference implementation.
 - `AsciiRecord`: creation (Type-1 date and TCN, injectable through `Defaults`), fields by tag or
   alias, `get`/`set` with the `_N` syntax, sorting, LEN fixed point, summary.
 - Python's `struct` language (`StructValue`) and `BinaryRecord`, with `pack` / `unpack`;
@@ -92,10 +92,10 @@ First release: parity with `nistitl` 0.6.
   `from_reader`, `from_path`; the public lexer `parse_record` and `RecordVisitor`.
 - `Message::to_bytes_exact`: exact writing of what was read.
 - `ParseOptions::tolerant`: tolerant mode with `Diagnostic`s and `Message::trailing`.
-- Constants of the `alias` module, one per alias of `nistitl`.
-- Typed errors (`Error`, `ErrorKind`, `NistError`) with the messages of `nistitl` and a
+- Constants of the `alias` module, one per alias of the reference implementation.
+- Typed errors (`Error`, `ErrorKind`, `NistError`) with the messages of the reference implementation and a
   `Position` (record, tag, byte offset).
-- Oracle bench against `nistitl` 0.6, fuzz targets, property tests, guard against committing
+- Oracle bench against the reference implementation, fuzz targets, property tests, guard against committing
   real NIST files.
 
 [Unreleased]: https://github.com/ybdn/ansi-nist-itl/compare/v1.0.1...HEAD

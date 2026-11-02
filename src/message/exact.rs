@@ -20,7 +20,7 @@ impl Message {
     /// Bytes of the message, identical to the bytes read for every record
     /// that did not change (LIB-12).
     ///
-    /// [`to_bytes`](Message::to_bytes) writes as `nistitl` does: fields
+    /// [`to_bytes`](Message::to_bytes) writes as the reference implementation does: fields
     /// sorted, labels on 3 digits, LEN and CNT recomputed. This method keeps
     /// what was read instead:
     ///
@@ -32,7 +32,7 @@ impl Message {
     /// - the CNT of the Type-1 is recomputed only if the records, or their
     ///   types or IDCs, changed.
     ///
-    /// LEN and CNT values do not count as changes: `nistitl` recomputes them
+    /// LEN and CNT values do not count as changes: the reference implementation recomputes them
     /// on write, so `to_bytes` then `to_bytes_exact` still gives the bytes
     /// read.
     ///

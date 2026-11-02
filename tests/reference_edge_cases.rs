@@ -1,4 +1,4 @@
-//! Edge cases of SPEC appendix C, checked against `nistitl` 0.6 (§15.2).
+//! Edge cases of SPEC appendix C, checked against the reference implementation (§15.2).
 //!
 //! One test per case: same values read, same bytes written, or same text
 //! for the error.

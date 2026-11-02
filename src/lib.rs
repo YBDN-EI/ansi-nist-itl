@@ -1,9 +1,8 @@
 //! Parser and writer for ANSI/NIST-ITL biometric transaction files
 //! (`.nist`, `.eft`, `.an2`, `.int`…).
 //!
-//! The crate is a port of [`nistitl`](https://github.com/idemia/python-nistitl)
-//! 0.6 (Python, © IDEMIA, CeCILL-C): by default it reads and writes exactly
-//! as `nistitl` does, quirks included, with the same error messages. Two
+//! By default the crate reads and writes exactly
+//! as the reference implementation does, quirks included, with the same error messages. Two
 //! additions are opt-in: an exact writing that gives back the bytes read
 //! ([`Message::to_bytes_exact`]), and a tolerant mode that reads damaged
 //! files with located diagnostics ([`ParseOptions::tolerant`]).
@@ -62,25 +61,25 @@
 //! ([`BinaryRecord`]: Types 3 to 8). A tagged record holds [`Field`]s (text,
 //! split into [`SubField`]s and [`Item`]s by RS and US) and
 //! [`BinaryField`]s (the data at tag 999). Fields are found by tag or by
-//! [`alias`] (`IDC`, `SRC`, `DATA`…), as `nistitl` names them.
+//! [`alias`] (`IDC`, `SRC`, `DATA`…), as the reference implementation names them.
 //!
-//! Values are Python values ([`Value`], [`Scalar`], [`PyInt`]): `nistitl`
+//! Values are Python values ([`Value`], [`Scalar`], [`PyInt`]): the reference implementation
 //! stores text, numbers (LEN and IDC are read as numbers), `None` and
 //! booleans, and writes them with Python's `str()`. Binary data are
 //! [`Bytes`], views on the buffer read, never copied.
 //!
-//! # Parity with `nistitl`
+//! # Parity with the reference implementation
 //!
-//! [`Message::parse`] accepts and refuses what `nistitl` does, with the
+//! [`Message::parse`] accepts and refuses what the reference implementation does, with the
 //! same error messages ([`Error`]'s `Display`); [`Message::to_bytes`] and
 //! [`Message::summary`] give the same bytes and text. Python exceptions that
-//! `nistitl` does not catch become typed errors ([`ErrorKind`]); every error
+//! the reference implementation does not catch become typed errors ([`ErrorKind`]); every error
 //! also carries a [`Position`]: record, tag, byte offset. The crate never
 //! panics on its input, which is fuzzed.
 //!
 //! # Versions
 //!
-//! As `nistitl`, the crate never reads the version of the standard (1.002,
+//! As the reference implementation, the crate never reads the version of the standard (1.002,
 //! kept as text): every version is read and written the same way, the
 //! traditional ones (0200 to 0500) as the later ones. No rule depends on the
 //! version: a record type is accepted whatever the version declares, and
@@ -99,7 +98,7 @@
 //!
 //! # Exact writing
 //!
-//! `nistitl` sorts fields, writes labels on 3 digits and recomputes LEN and
+//! the reference implementation sorts fields, writes labels on 3 digits and recomputes LEN and
 //! CNT. [`Message::to_bytes_exact`] keeps the bytes read for what did not
 //! change instead:
 //!
@@ -183,7 +182,7 @@
 //! # Features
 //!
 //! - `local-date` (default): today's date of a new Type-1 is the local date,
-//!   as `nistitl` gives it; without it, the UTC date. [`Defaults`] fixes the
+//!   as the reference implementation gives it; without it, the UTC date. [`Defaults`] fixes the
 //!   date and the transaction control number.
 //! - `serde`: `Serialize` and `Deserialize` on the model (see above).
 //! - `dictionary`: the `dictionary` module, the fields of

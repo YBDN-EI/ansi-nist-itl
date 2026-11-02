@@ -434,7 +434,7 @@ impl Message {
     /// it.
     ///
     /// Type 1 gives `CANNOT_DELETE_TYPE1`; no record gives the `TypeError`
-    /// of `nistitl` (`TypeMismatch`).
+    /// of the reference implementation (`TypeMismatch`).
     ///
     /// ```
     /// use ansi_nist_itl::{AsciiRecord, Message};
@@ -465,8 +465,8 @@ impl Message {
     /// Removes the first record equal to `record` (`msg - record`) and
     /// returns it.
     ///
-    /// `nistitl` compares identities; records are compared by value here. A
-    /// Type-1 gives `CANNOT_DELETE_TYPE1` (`nistitl` would remove it), no
+    /// the reference implementation compares identities; records are compared by value here. A
+    /// Type-1 gives `CANNOT_DELETE_TYPE1` (the reference implementation would remove it), no
     /// equal record `RECORD_NOT_FOUND`.
     ///
     /// ```
@@ -531,7 +531,7 @@ impl Message {
     /// then one subfield `<type> US <IDC>` per record, the IDC taken as is
     /// (`"07"` stays `07`). An absent CNT gives `MissingField`.
     ///
-    /// The value cannot be set: `nistitl` raises `AttributeError`.
+    /// The value cannot be set: the reference implementation raises `AttributeError`.
     ///
     /// ```
     /// use ansi_nist_itl::{AsciiRecord, Message};
@@ -661,7 +661,7 @@ pub(crate) fn rebuild_cnt<'a>(first: &'a mut Record, rest: &[Record]) -> Result<
     add_cnt_entry(field, || Ok((Item::from(1), Item::from(count)))).map_err(at_record(0))?;
     for (i, r) in rest.iter().enumerate() {
         // `r.IDC` is read once the subfield is added: on error, the empty
-        // subfield stays, as in `nistitl`.
+        // subfield stays, as in the reference implementation.
         add_cnt_entry(field, || {
             Ok((Item::from(r.record_type()), Item::from(r.idc()?)))
         })

@@ -1,6 +1,6 @@
 //! Python's `struct` language, as CPython 3.12 implements it (SPEC §9.5).
 //!
-//! `nistitl` packs and unpacks the value of binary records with
+//! the reference implementation packs and unpacks the value of binary records with
 //! `struct.pack` and `struct.unpack`. This module reproduces their sizes,
 //! alignments, conversions and error messages; Python exceptions become
 //! errors of kind [`ErrorKind::Struct`](crate::ErrorKind::Struct), except the

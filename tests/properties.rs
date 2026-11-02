@@ -1,6 +1,6 @@
 //! Properties of the writing and the reading (SPEC §15.4, QA-03, QA-05).
 //!
-//! Messages are generated through the API, in the forms that `nistitl`
+//! Messages are generated through the API, in the forms that the reference implementation
 //! reads back as written: Latin-1 text without separators nor `999:`,
 //! lists of at least two subfields or items, no `None`, no alias of its own.
 

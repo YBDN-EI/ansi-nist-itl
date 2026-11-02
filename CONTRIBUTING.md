@@ -5,11 +5,11 @@ Thanks for your interest in `ansi-nist-itl`! Issues and pull requests are welcom
 ## Ground rules
 
 - **Never commit or attach a real NIST file.** They hold biometric and personal data. Tests
-  use synthetic files only, built by the crate or by `nistitl` with invented values; a CI job
+  use synthetic files only, built by the crate or by the reference implementation with invented values; a CI job
   refuses others (`tools/check-data-files.sh`). To report a problem with a real file, see
   [SECURITY.md](SECURITY.md).
-- **Parity with `nistitl` 0.6 is the default behaviour.** `Message::parse` must accept and
-  refuse what `nistitl` does, and `Message::to_bytes` write the same bytes, quirks included.
+- **Parity with the reference implementation is the default behaviour.** `Message::parse` must accept and
+  refuse what the reference implementation does, and `Message::to_bytes` write the same bytes, quirks included.
   Improvements that diverge from it are opt-in (`to_bytes_exact`, `ParseOptions::tolerant`,
   the `validation` feature…).
 - **Never panic on input**, no `unsafe`, as few dependencies as possible (optional features for
@@ -36,7 +36,7 @@ cargo test --doc --all-features
 RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features
 ```
 
-When a change touches parsing or writing, also run the oracle bench against `nistitl`
+When a change touches parsing or writing, also run the oracle bench against the reference implementation
 ([`tools/oracle/README.md`](tools/oracle/README.md)) and, if possible, the fuzz targets
 (`cargo +nightly fuzz run parse`, in `fuzz/`).
 
@@ -48,5 +48,5 @@ documents of NIST and of the FBI: change the generators in `tools/standard/` and
 
 ## License
 
-By contributing, you agree that your contributions are licensed under the CeCILL-C license of
+By contributing, you agree that your contributions are licensed under the MIT license of
 the project ([LICENSE](LICENSE)).

@@ -1,6 +1,6 @@
 //! Character encodings declared in field 1.015, DCS (LIB-18).
 //!
-//! As `nistitl`, the crate reads and writes text as Latin-1: each byte is
+//! As the reference implementation, the crate reads and writes text as Latin-1: each byte is
 //! one character. A file whose 1.015 declares UTF-8 therefore reads `"é"`
 //! as `"Ã©"`. This module is opt-in: [`decode`] turns that Latin-1 view into
 //! the text of the declared encoding, [`encode`] does the reverse before
@@ -199,7 +199,7 @@ pub fn decode(text: &str, encoding: CharacterEncoding) -> Result<String> {
 }
 
 /// Turns a text into the Latin-1 view of its bytes in `encoding`, ready to
-/// be set in a field and written as `nistitl` writes text.
+/// be set in a field and written as the reference implementation writes text.
 ///
 /// Fails with [`ErrorKind::Encoding`] for a character the encoding cannot
 /// hold, and with [`ErrorKind::UnsupportedEncoding`] as [`decode`].

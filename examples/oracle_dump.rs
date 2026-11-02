@@ -6,7 +6,7 @@
 //!
 //! - success: `{"ok": true, "summary": ..., "rewrite_sha256": ...}`;
 //! - failure: `{"ok": false, "error": ..., "exception": ...}`, with the name
-//!   of the Python exception `nistitl` raises.
+//!   of the Python exception the reference implementation raises.
 //!
 //! ```text
 //! cargo run --release --example oracle_dump -- <corpus> > rust.tsv
@@ -18,7 +18,7 @@ use std::path::{Path, PathBuf};
 
 use ansi_nist_itl::{Error, ErrorKind, Message};
 
-/// Name of the Python exception `nistitl` raises for `e` (SPEC §12).
+/// Name of the Python exception the reference implementation raises for `e` (SPEC §12).
 pub fn exception(e: &Error) -> &'static str {
     let message = e.message();
     match e.kind() {

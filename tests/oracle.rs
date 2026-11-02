@@ -1,10 +1,10 @@
-//! Oracle bench (SPEC §15.3, QA-02, DATA-03): the crate and `nistitl` 0.6
+//! Oracle bench (SPEC §15.3, QA-02, DATA-03): the crate and the reference implementation
 //! must give the same JSON on every file of a corpus kept out of the
 //! repository.
 //!
 //! Skipped unless `ANSI_NIST_ITL_CORPUS` names a file or directory. The
 //! Python side runs `tools/oracle/dump.py` with `ANSI_NIST_ITL_PYTHON`
-//! (default `python3`), which must import `nistitl` 0.6 under CPython 3.12
+//! (default `python3`), which must import the reference implementation under CPython 3.12
 //! (`NISTITL_PATH` may name the directory of `nistitl.py`).
 //!
 //! ```text
@@ -19,7 +19,7 @@ use std::process::Command;
 mod oracle_dump;
 
 #[test]
-fn same_json_as_nistitl() {
+fn same_json_as_the_reference() {
     let Some(corpus) = std::env::var_os("ANSI_NIST_ITL_CORPUS") else {
         eprintln!("ANSI_NIST_ITL_CORPUS is not set: oracle bench skipped");
         return;
@@ -55,7 +55,7 @@ fn same_json_as_nistitl() {
     assert_eq!(lines.next(), None, "dump.py printed more lines than files");
     assert!(
         mismatches.is_empty(),
-        "{} of {} files differ from nistitl:\n{}",
+        "{} of {} files differ from the reference:\n{}",
         mismatches.len(),
         files.len(),
         mismatches

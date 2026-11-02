@@ -1,4 +1,4 @@
-//! `%` and `str.format` conversions used by `nistitl` (SPEC §3.5).
+//! `%` and `str.format` conversions used by the reference implementation (SPEC §3.5).
 
 use std::borrow::Cow;
 use std::fmt;

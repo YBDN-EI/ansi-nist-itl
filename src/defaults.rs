@@ -1,4 +1,4 @@
-//! Values that `nistitl` draws from the clock when creating a Type-1 record
+//! Values that the reference implementation draws from the clock when creating a Type-1 record
 //! (SPEC §8.1, §14.4): today's date and a transaction control number.
 
 use std::collections::hash_map::RandomState;
@@ -9,7 +9,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 /// Values used instead of the clock when a record is created, for
 /// deterministic output.
 ///
-/// `None` keeps the value of `nistitl`: today's date (`1.005`, `AAAAMMJJ`) and
+/// `None` keeps the value of the reference implementation: today's date (`1.005`, `AAAAMMJJ`) and
 /// a fresh `uuid.uuid1().hex` (`1.009`).
 ///
 /// ```
