@@ -6,6 +6,8 @@ All notable changes to this crate are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-02
+
 ### Fixed
 
 - Validation of the Type-9: the fields of the INCITS 378 block (9.126–9.140), of the other
@@ -96,7 +98,8 @@ First release: parity with `nistitl` 0.6.
 - Oracle bench against `nistitl` 0.6, fuzz targets, property tests, guard against committing
   real NIST files.
 
-[Unreleased]: https://github.com/ybdn/ansi-nist-itl/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/ybdn/ansi-nist-itl/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/ybdn/ansi-nist-itl/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/ybdn/ansi-nist-itl/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/ybdn/ansi-nist-itl/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/ybdn/ansi-nist-itl/releases/tag/v0.1.0
